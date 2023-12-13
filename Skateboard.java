@@ -11,17 +11,29 @@ public class Skateboard extends Vehicle
     private double yPos;
     private double speed;       // feet per second
     private String name;
-    
+    private int scratches;
+    private boolean needsPolish;
     /**
      * Constructor form objects of class Skateboard
      */
     public Skateboard(String name, double speed) {
+        super(name, speed);
         this.xPos = 0.0;
         this.yPos = 0.0;
         this.speed = speed;
         this.name = name;
+
     }
-    
+    public void addScratch(){
+        scratches++; 
+        if(scratches > 10){
+            needsPolish = true;
+        }
+    }
+    public void polishUp(){
+        scratches = 0;
+        needsPolish = false;
+    }
     /**
      * Getter functions for the instance variables
      */
@@ -58,6 +70,7 @@ public class Skateboard extends Vehicle
         double deltaX = (speed * time) * Math.sin(direction * Math.PI / 360);
         xPos = xPos + deltaX;
         yPos = yPos + deltaY;
+        addScratch();
     }
     
     public double distanceFromHome() {
